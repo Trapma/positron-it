@@ -33,9 +33,6 @@ export default {
 .nav {
   display: flex;
   flex-direction: column;
-  // justify-content: end;
-  padding: 0 80px;
-  // align-items: center;
   height: 140px;
 
   &__info {
@@ -47,11 +44,13 @@ export default {
     justify-content: space-between;
   }
   &__menu {
+    height: 95px;
   }
 }
 
 .cart-info {
   display: flex;
+  align-items: center;
 
   // &__img {
   // }

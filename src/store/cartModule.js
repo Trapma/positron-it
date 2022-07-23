@@ -9,8 +9,9 @@ export const cartModule = {
         title: "Вытяжное устройство G2H",
         descr:
           "12-72/168 м3/ч / гидрорегулируемый расход / от датчика присутствия",
-        art: "Артикул: G2H1065",
+        article: "Артикул: G2H1065",
         price: 12644,
+        img: require("@/assets/image/Rectangle72-1.png"),
         count: 1,
       },
       {
@@ -18,8 +19,9 @@ export const cartModule = {
         title: "Вытяжное устройство BXC",
         descr:
           "12-72/168 м3/ч / гидрорегулируемый расход / от датчика присутствия",
-        art: "Артикул: G2H1065",
+        article: "Артикул: G2H1065",
         price: 12644,
+        img: require("@/assets/image/Rectangle72-2.png"),
         count: 2,
       },
       {
@@ -27,8 +29,9 @@ export const cartModule = {
         title: "Вытяжное устройство GHN",
         descr:
           "12-72/168 м3/ч / гидрорегулируемый расход / от датчика присутствия",
-        art: "Артикул: G2H1065",
+        article: "Артикул: G2H1065",
         price: 12644,
+        img: require("@/assets/image/Rectangle72-3.png"),
         count: 1,
       },
     ],
