@@ -59,13 +59,13 @@ export default {
   }
   &__title {
     // $style, $weight, $font-size, $line-height, $color
-    @include text-lato(normal, 400, 14px, 150%, $text-title-color);
+    @include text-lato(400, 14px, 150%, $text-title-color);
   }
   &__count {
-    @include text-lato(normal, 400, 12px, 145%, $text-thin-color);
+    @include text-lato(400, 12px, 145%, $text-thin-color);
   }
   &__price {
-    @include text-lato(normal, 400, 12px, 145%, $text-title-color);
+    @include text-lato(400, 12px, 145%, $text-title-color);
   }
 }
 </style>

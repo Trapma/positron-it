@@ -4,18 +4,17 @@
 // @import url("@/scss/variables.scss");
 // @import url("@/scss/mixins.scss");
 
+// @mixin text-lato($style, $weight, $font-size, $line-height, $color) {
+//   #{$property}: $ltr-value;
 
-@mixin text-lato($style, $weight, $font-size, $line-height, $color) {
-  #{$property}: $ltr-value;
+//   [dir=rtl] & {
+//     #{$property}: $rtl-value;
+//   }
+//     font-family: 'Lato';
+//     font-style: $style;
+//     font-weight: $weight;
+//     font-size: $font-size;
+//     line-height: $line-height;
+//     color: $color;
 
-  [dir=rtl] & {
-    #{$property}: $rtl-value;
-  }
-    font-family: 'Lato';
-    font-style: $style;
-    font-weight: $weight;
-    font-size: $font-size;
-    line-height: $line-height;
-    color: $color;
-
-}
+// }

@@ -8,4 +8,8 @@
   padding: 0 80px;
   color: $text-title-color;
 }
+
+hr {
+  margin: 0;
+}
 </style>

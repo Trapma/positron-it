@@ -1,15 +1,15 @@
-@mixin text-lato($style, $weight, $font-size, $line-height, $color) {
+@mixin text-lato($weight, $font-size, $line-height, $color) {
     font-family: 'Lato';
-    font-style: $style;
+    font-style: normal;
     font-weight: $weight;
     font-size: $font-size;
     line-height: $line-height;
     color: $color;
 
 }
-@mixin text-roboto($style, $weight, $font-size, $line-height, $color) {
+@mixin text-roboto($weight, $font-size, $line-height, $color) {
     font-family: 'Roboto';
-    font-style: $style;
+    font-style: normal;
     font-weight: $weight;
     font-size: $font-size;
     line-height: $line-height;

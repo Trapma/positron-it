@@ -20,10 +20,10 @@ export default {};
   }
 
   &__start {
-    @include text-lato(normal, 400, 14px, 21px, $text-crumbs-start-color);
+    @include text-lato(400, 14px, 21px, $text-crumbs-start-color);
   }
   &__end {
-    @include text-lato(normal, 400, 14px, 21px, $text-thin-color);
+    @include text-lato(400, 14px, 21px, $text-thin-color);
   }
 }
 </style>
