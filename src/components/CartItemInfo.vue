@@ -49,13 +49,18 @@
   </div>
   <div class="check-info">
     <div class="check-info__check">
-      <c-checkbox />
+      <c-checkbox
+        :model-value="checkStatus"
+        @update:model-value="setCheckStatus"
+      />
     </div>
     <div class="check-info__img">
       <img src="@/assets/image/svg/set.svg" alt="" width="50" height="50" />
     </div>
     <div class="check-info__text">
-      <div class="check-info__title"><span>Установка</span></div>
+      <div class="check-info__title">
+        <span>Установка</span>
+      </div>
       <div class="check-info__body">
         <span
           >Отметьте, если Вам необходима консультация профессионала по монтажу
@@ -71,8 +76,14 @@ import CCheckbox from "@/components/Ui/checkbox/CCheckbox.vue";
 import { mapMutations, mapGetters, mapState } from "vuex";
 import { prettifyNumber } from "@/utils/prettifyNumber";
 export default {
+  name: "cart-item-info",
   components: {
     CCheckbox,
+  },
+  data() {
+    return {
+      checkedValue: true,
+    };
   },
   mounted() {
     console.log("1", this.cartItems);
@@ -80,6 +91,7 @@ export default {
   computed: {
     ...mapState({
       cartItems: (state) => state.cart.cartItems,
+      checkStatus: (state) => state.cart.checkStatus,
     }),
     ...mapGetters({
       totalPriceCart: "cart/getTotalPriceCart",
@@ -92,6 +104,7 @@ export default {
       minusCount: "cart/DECREMENT",
       deleteItem: "cart/DELETE_ITEM",
       clearCart: "cart/CLEAR_CART",
+      setCheckStatus: "cart/SET_CHECK",
     }),
     getPrettyNum(price) {
       return prettifyNumber(price);

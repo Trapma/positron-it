@@ -1,12 +1,19 @@
 <template>
   <label>
-    <input type="checkbox" @change="$emit('input', $event.target.checked)" />
+    <input
+      type="checkbox"
+      :checked="modelValue"
+      @change="$emit('update:modelValue', $event.target.checked)"
+    />
     <span></span>
   </label>
 </template>
 <script>
 export default {
   name: "c-checkbox",
+  props: {
+    modelValue: [Boolean],
+  },
 };
 </script>
 <style lang="scss" scoped>

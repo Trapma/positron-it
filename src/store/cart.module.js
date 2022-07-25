@@ -36,6 +36,7 @@ export const cart = {
         count: 1,
       },
     ],
+    checkStatus: true,
     isLoading: false,
   }),
   getters: {
@@ -104,6 +105,9 @@ export const cart = {
     },
     CLEAR_CART(state) {
       state.cartItems = [];
+    },
+    SET_CHECK(state, status) {
+      state.checkStatus = status;
     },
   },
 };
