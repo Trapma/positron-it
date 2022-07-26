@@ -4,38 +4,8 @@ export const cart = {
   namespaced: true,
 
   state: () => ({
-    cartItems: [
-      {
-        id: 1,
-        title: "Вытяжное устройство G2H",
-        descr:
-          "12-72/168 м3/ч / гидрорегулируемый расход / от датчика присутствия",
-        article: "Артикул: G2H1065",
-        price: 12644,
-        img: require("@/assets/image/Rectangle72-1.png"),
-        count: 1,
-      },
-      {
-        id: 2,
-        title: "Вытяжное устройство BXC",
-        descr:
-          "12-72/168 м3/ч / гидрорегулируемый расход / от датчика присутствия",
-        article: "Артикул: G2H1065",
-        price: 12644,
-        img: require("@/assets/image/Rectangle72-3.png"),
-        count: 2,
-      },
-      {
-        id: 3,
-        title: "Вытяжное устройство GHN",
-        descr:
-          "12-72/168 м3/ч / гидрорегулируемый расход / от датчика присутствия",
-        article: "Артикул: G2H1065",
-        price: 12644,
-        img: require("@/assets/image/Rectangle72-2.png"),
-        count: 1,
-      },
-    ],
+    cartItems: [],
+    cartId: null,
     checkStatus: true,
     isLoading: false,
   }),
@@ -55,7 +25,7 @@ export const cart = {
     },
   },
   actions: {
-    updateCartDebounce({ state, dispatch }) {
+    async updateCartDebounce({ state, dispatch }) {
       const setTime = setTimeout(() => {
         dispatch("updateCart");
       }, 500);
@@ -67,13 +37,65 @@ export const cart = {
     async updateCart({ state, commit }) {
       commit("IS_LOADING", true);
       try {
-        const res = await cartService.updateCart(state.cartItems);
-        // console.log('response order module', res.data)
-        commit("IS_LOADING", false);
-        console.log("res", res);
-        // commit("UPDATE_ORDER", res.data.updateCart.dish_ids);
+        const data = {
+          id: state.cartId,
+          cart_items: state.cartItems,
+        };
+        await cartService.updateCart(data);
       } catch (err) {
         return console.log(err);
+      } finally {
+        commit("IS_LOADING", false);
+      }
+    },
+
+    async pay({ state, commit }) {
+      commit("IS_LOADING", true);
+      try {
+        const data = {
+          cart_items: state.cartItems,
+          checkSettings: state.checkStatus,
+        };
+        const res = await cartService.pay(data);
+        console.log("res", res);
+      } catch (err) {
+        return console.log(err);
+      } finally {
+        commit("IS_LOADING", false);
+      }
+    },
+
+    async getCart({ commit }) {
+      commit("IS_LOADING", true);
+      try {
+        const res = await cartService.getCart();
+        console.log("res", res);
+        if (res.status !== 200) throw new Error(res.status);
+
+        if (!res.data[0].cart_items.length) {
+          const res = await cartService.getBackup();
+          commit("GET_CART", res.data[0]);
+        } else {
+          commit("GET_CART", res.data[0]);
+        }
+      } catch (err) {
+        return console.log(err);
+      } finally {
+        commit("IS_LOADING", false);
+      }
+    },
+
+    async getOrderPay({ commit }, id) {
+      commit("IS_LOADING", true);
+      try {
+        const res = await cartService.getOrderPay(id);
+        console.log("res", res);
+        if (res.status !== 200) throw new Error(res.status);
+        commit("GET_CART", res.data[0]);
+      } catch (err) {
+        return console.log(err);
+      } finally {
+        commit("IS_LOADING", false);
       }
     },
   },
@@ -108,6 +130,10 @@ export const cart = {
     },
     SET_CHECK(state, status) {
       state.checkStatus = status;
+    },
+    GET_CART(state, cart) {
+      state.cartItems = cart.cart_items;
+      state.cartId = cart.id;
     },
   },
 };
