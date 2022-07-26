@@ -6,8 +6,21 @@
       <div class="cart-info">
         <img class="cart-info__img" src="@/assets/image/svg/cart.svg" />
         <div class="cart-info__text">
-          <div class="cart-info__title">Ваша корзина</div>
-          <div class="cart-info__count">3 товара</div>
+          <div class="cart-info__title"><span>Ваша корзина</span></div>
+          <div class="cart-info__count">
+            <span
+              >{{ totalCountCart }}
+              {{
+                !totalCountCart
+                  ? "Товаров"
+                  : totalCountCart === 1
+                  ? "Товар"
+                  : totalCountCart < 5
+                  ? " Товара"
+                  : " Товаров"
+              }}</span
+            >
+          </div>
           <div class="cart-info__price">{{ totalPriceCart }} ₽</div>
         </div>
       </div>
@@ -24,6 +37,7 @@ export default {
     }),
     ...mapGetters({
       totalPriceCart: "cart/getTotalPriceCart",
+      totalCountCart: "cart/getTotalCountCart",
     }),
   },
 };
@@ -34,6 +48,7 @@ export default {
   display: flex;
   flex-direction: column;
   height: 140px;
+  width: 100%;
 
   &__info {
     height: 45px;

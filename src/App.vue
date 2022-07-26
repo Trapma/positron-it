@@ -8,7 +8,9 @@
   padding: 0 80px;
   color: $text-title-color;
 }
-
+h1 {
+  margin: 0;
+}
 hr {
   margin: 0;
 }

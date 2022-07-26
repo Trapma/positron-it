@@ -24,7 +24,7 @@ export default {
   span {
     width: 20px;
     height: 20px;
-    border: 1px solid #797b86;
+    border: 1px solid $text-thin-color;
     box-shadow: inset 2px 2px 1px rgba(0, 0, 0, 0.08);
     border-radius: 2px;
     display: inline-block;
@@ -34,8 +34,8 @@ export default {
       position: absolute;
       top: -5px;
       left: 7px;
-      border-bottom: 2px solid #0069b4;
-      border-right: 2px solid #0069b4;
+      border-bottom: 2px solid $text-blue-color;
+      border-right: 2px solid $text-blue-color;
       height: 11px;
       width: 6px;
       transform: rotate(45deg);
@@ -45,7 +45,7 @@ export default {
   input {
     display: none;
     &:checked ~ span {
-      background: rgb(255, 255, 255);
+      background: $text-white-color;
       &:after {
         visibility: visible;
       }
