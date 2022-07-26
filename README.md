@@ -1,24 +1,24 @@
 # positron-it
 
-## Project setup
+## Start
+
+#### Project setup
 ```
 npm install
 ```
+#### Json-server setup
+```
+cd json-server
+npm install
+```
+## Run project
 
-### Compiles and hot-reloads for development
+#### Run json-server
+```
+cd json-server
+npm run watch
+```
+#### Compiles and hot-reloads for development
 ```
 npm run serve
 ```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
