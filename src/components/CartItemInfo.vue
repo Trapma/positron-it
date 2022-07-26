@@ -1,71 +1,87 @@
 <template>
-  <div class="title">
-    <div class="title__info">
-      <h1 class="title__name">Ваша корзина</h1>
-      <span class="title__count">{{ totalCountCart }} товара</span>
-    </div>
-    <span class="title__clear"><u>Очистить корзину</u></span>
-  </div>
-  <div class="cart-list">
-    <div class="cart-item" v-for="(item, index) in cartItems" :key="item.id">
-      <div class="cart-item__card">
-        <img
-          class="cart-item__img"
-          :src="item.img"
-          height="100"
-          width="100"
-          alt=""
-        />
-        <div class="cart-item__text">
-          <div class="cart-item__title">{{ item.title }}</div>
-          <div class="cart-item__descr">{{ item.descr }}</div>
-          <div class="cart-item__article">{{ item.article }}</div>
-        </div>
-
-        <div class="cart-item__controller cart-item__controller_wrapper">
-          <div class="cart-item__controller">
-            <button class="cart-item__minus" @click="minusCount(item.id)">
-              <img src="@/assets/image/svg/minus.svg" />
-            </button>
-            <div class="cart-item__count">{{ item.count }}</div>
-            <button class="cart-item__plus" @click="plusCount(item.id)">
-              <img src="@/assets/image/svg/plus.svg" />
-            </button>
-          </div>
-          <div class="cart-item__info" v-if="item.count > 1">
-            <span>{{ getPrettyNum(item.price) }}&nbsp;₽/шт.</span>
-          </div>
-        </div>
-        <div class="cart-item__price">
-          {{ getPrettyNum(item.price * item.count) }}&nbsp;₽
-        </div>
-
-        <button class="cart-item__close" @click="deleteItem(item.id)">
-          <img src="@/assets/image/svg/close.svg" />
-        </button>
-      </div>
-      <hr class="cart-item__divider" v-if="index !== cartItems.length - 1" />
-    </div>
-  </div>
-  <div class="check-info">
-    <div class="check-info__check">
-      <c-checkbox
-        :model-value="checkStatus"
-        @update:model-value="setCheckStatus"
-      />
-    </div>
-    <div class="check-info__img">
-      <img src="@/assets/image/svg/set.svg" alt="" width="50" height="50" />
-    </div>
-    <div class="check-info__text">
-      <div class="check-info__title">
-        <span>Установка</span>
-      </div>
-      <div class="check-info__body">
-        <span
-          >Отметьте, если Вам необходима консультация профессионала по монтажу
-          выбранных товаров.</span
+  <div class="info-wrapper">
+    <div class="title">
+      <div class="title__info">
+        <h1 class="title__name">Ваша корзина</h1>
+        <span class="title__count"
+          >{{ totalCountCart }}
+          {{
+            !totalCountCart
+              ? "Товаров"
+              : totalCountCart === 1
+              ? "Товар"
+              : totalCountCart < 5
+              ? " Товара"
+              : " Товаров"
+          }}</span
         >
+      </div>
+      <button @click="clearCart" class="title__clear">
+        <u>Очистить корзину</u>
+      </button>
+    </div>
+    <div class="cart-list">
+      <c-page-loader v-if="isLoading" />
+      <div class="cart-item" v-for="(item, index) in cartItems" :key="item.id">
+        <div class="card">
+          <img
+            class="card__img"
+            :src="item.img"
+            height="100"
+            width="100"
+            alt=""
+          />
+          <div class="card__text">
+            <div class="card__title">{{ item.title }}</div>
+            <div class="card__descr">{{ item.descr }}</div>
+            <div class="card__article">{{ item.article }}</div>
+          </div>
+
+          <div class="card__controller card__controller_wrapper">
+            <div class="card__controller">
+              <button class="card__minus" @click="minusCount(item.id)">
+                <img src="@/assets/image/svg/minus.svg" />
+              </button>
+              <div class="card__count">{{ item.count }}</div>
+              <button class="card__plus" @click="plusCount(item.id)">
+                <img src="@/assets/image/svg/plus.svg" />
+              </button>
+            </div>
+            <div class="card__info" v-if="item.count > 1">
+              <span>{{ getPrettyNum(item.price) }}&nbsp;₽/шт.</span>
+            </div>
+          </div>
+          <div class="card__price">
+            {{ getPrettyNum(item.price * item.count) }}&nbsp;₽
+          </div>
+
+          <button class="card__close" @click="deleteItem(item.id)">
+            <img src="@/assets/image/svg/close.svg" />
+          </button>
+        </div>
+        <hr class="cart-item__divider" v-if="index !== cartItems.length - 1" />
+      </div>
+    </div>
+    <div v-if="cartItems" class="check-info">
+      <div class="check-info__check">
+        <c-checkbox
+          :model-value="checkStatus"
+          @update:model-value="setCheckStatus"
+        />
+      </div>
+      <div class="check-info__img">
+        <img src="@/assets/image/svg/set.svg" alt="" width="50" height="50" />
+      </div>
+      <div class="check-info__text">
+        <div class="check-info__title">
+          <span>Установка</span>
+        </div>
+        <div class="check-info__body">
+          <span
+            >Отметьте, если Вам необходима консультация профессионала по монтажу
+            выбранных товаров.</span
+          >
+        </div>
       </div>
     </div>
   </div>
@@ -73,12 +89,14 @@
 
 <script>
 import CCheckbox from "@/components/Ui/checkbox/CCheckbox.vue";
-import { mapMutations, mapGetters, mapState } from "vuex";
+import CPageLoader from "@/components/Ui/pageloader/CPageloader.vue";
+import { mapActions, mapMutations, mapGetters, mapState } from "vuex";
 import { prettifyNumber } from "@/utils/prettifyNumber";
 export default {
   name: "cart-item-info",
   components: {
     CCheckbox,
+    CPageLoader,
   },
   data() {
     return {
@@ -86,40 +104,62 @@ export default {
     };
   },
   mounted() {
-    console.log("1", this.cartItems);
+    // this.getCart();
   },
   computed: {
     ...mapState({
       cartItems: (state) => state.cart.cartItems,
       checkStatus: (state) => state.cart.checkStatus,
+      isLoading: (state) => state.cart.isLoading,
     }),
     ...mapGetters({
-      totalPriceCart: "cart/getTotalPriceCart",
       totalCountCart: "cart/getTotalCountCart",
     }),
   },
   methods: {
     ...mapMutations({
-      plusCount: "cart/INCREMENT",
-      minusCount: "cart/DECREMENT",
-      deleteItem: "cart/DELETE_ITEM",
-      clearCart: "cart/CLEAR_CART",
-      setCheckStatus: "cart/SET_CHECK",
+      plus: "cart/INCREMENT",
+      minus: "cart/DECREMENT",
+      delete: "cart/DELETE_ITEM",
+      clear: "cart/CLEAR_CART",
+      setCheck: "cart/SET_CHECK",
     }),
+    ...mapActions("cart", ["updateCartDebounce", "updateCart"]),
     getPrettyNum(price) {
       return prettifyNumber(price);
+    },
+    plusCount(id) {
+      this.plus(id);
+      this.updateCartDebounce();
+    },
+    minusCount(id) {
+      this.minus(id);
+      this.updateCartDebounce();
+    },
+    clearCart() {
+      this.clear();
+      this.updateCart();
+    },
+    deleteItem(id) {
+      this.delete(id);
+      this.updateCart();
+    },
+    setCheckStatus(isTrue) {
+      this.setCheck(isTrue);
+      this.updateCart();
     },
   },
 };
 </script>
 
 <style lang="scss" scoped>
+.info-wrapper {
+  width: 100%;
+}
 .title {
   display: flex;
   align-items: baseline;
   justify-content: space-between;
-  margin-top: 30px;
-  width: 800px;
   &__info {
     display: flex;
     align-items: baseline;
@@ -135,23 +175,32 @@ export default {
   }
   &__clear {
     @include text-lato(400, 14px, 150%, $text-thin-color);
+    cursor: pointer;
+    border: none;
+    background: $text-white-color;
+    &:active {
+      color: $text-title-color;
+    }
   }
 }
 .cart-list {
-  width: 800px;
+  min-height: 200px;
   display: flex;
   flex-direction: column;
   margin-top: 25px;
+  position: relative;
 }
 .cart-item {
-  &__card {
-    display: flex;
-    align-items: center;
-    height: 100px;
-    margin-top: 25px;
-    position: relative;
+  &__divider {
+    margin-top: 20px;
   }
-
+}
+.card {
+  display: flex;
+  align-items: center;
+  height: 100px;
+  margin-top: 25px;
+  position: relative;
   &__img {
     margin-left: 15px;
   }
@@ -200,7 +249,7 @@ export default {
     cursor: pointer;
     border: none;
     &:active {
-      background: $bg-card-btn-active;
+      background: $text-thin-color;
     }
   }
 
@@ -235,22 +284,18 @@ export default {
     border: none;
     background: white;
     position: absolute;
+    border-radius: 5px;
     right: 0;
     top: 0;
-  }
-  &__divider {
-    margin-top: 20px;
-    /* position: absolute;
-    bottom: 0;
-    width: 100%;
-    color: $hr-color;*/
+    &:active {
+      background: $text-thin-color;
+    }
   }
 }
 .check-info {
   display: flex;
   margin-top: 44px;
   height: 102px;
-  width: 800px;
   background: $bg-card-color;
   border-radius: 5px;
   align-items: center;
