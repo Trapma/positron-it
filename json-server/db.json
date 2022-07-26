@@ -16,33 +16,73 @@
   "profile": {
     "name": "typicode"
   },
+  "orderPay": [],
   "cart": [
     {
       "id": 1,
-      "title": "Вытяжное устройство G2H",
-      "descr": "12-72/168 м3/ч / гидрорегулируемый расход / от датчика присутствия",
-      "article": "Артикул: G2H1065",
-      "price": 12644,
-      "img": "require('@/assets/image/Rectangle72-1.png')",
-      "count": 1
-    },
+      "cart_items": [
+        {
+          "id": 1,
+          "title": "Вытяжное устройство G2H",
+          "descr": "12-72/168 м3/ч / гидрорегулируемый расход / от датчика присутствия",
+          "article": "Артикул: G2H1065",
+          "price": 12644,
+          "img": "http://localhost:4000/assets/image/Rectangle72-1.png",
+          "count": 2
+        },
+        {
+          "id": 2,
+          "title": "Вытяжное устройство BXC",
+          "descr": "12-72/168 м3/ч / гидрорегулируемый расход / от датчика присутствия",
+          "article": "Артикул: G2H1065",
+          "price": 12644,
+          "img": "http://localhost:4000/assets/image/Rectangle72-3.png",
+          "count": 2
+        },
+        {
+          "id": 3,
+          "title": "Вытяжное устройство GHN",
+          "descr": "12-72/168 м3/ч / гидрорегулируемый расход / от датчика присутствия",
+          "article": "Артикул: G2H1065",
+          "price": 12644,
+          "img": "http://localhost:4000/assets/image/Rectangle72-2.png",
+          "count": 2
+        }
+      ]
+    }
+  ],
+  "cart-backup": [
     {
-      "id": 2,
-      "title": "Вытяжное устройство BXC",
-      "descr": "12-72/168 м3/ч / гидрорегулируемый расход / от датчика присутствия",
-      "article": "Артикул: G2H1065",
-      "price": 12644,
-      "img": "require('@/assets/image/Rectangle72-3.png')",
-      "count": 2
-    },
-    {
-      "id": 3,
-      "title": "Вытяжное устройство GHN",
-      "descr": "12-72/168 м3/ч / гидрорегулируемый расход / от датчика присутствия",
-      "article": "Артикул: G2H1065",
-      "price": 12644,
-      "img": "require('@/assets/image/Rectangle72-2.png')",
-      "count": 1
+      "id": 1,
+      "cart_items": [
+        {
+          "id": 1,
+          "title": "Вытяжное устройство G2H",
+          "descr": "12-72/168 м3/ч / гидрорегулируемый расход / от датчика присутствия",
+          "article": "Артикул: G2H1065",
+          "price": 12644,
+          "img": "http://localhost:4000/assets/image/Rectangle72-1.png",
+          "count": 2
+        },
+        {
+          "id": 2,
+          "title": "Вытяжное устройство BXC",
+          "descr": "12-72/168 м3/ч / гидрорегулируемый расход / от датчика присутствия",
+          "article": "Артикул: G2H1065",
+          "price": 12644,
+          "img": "http://localhost:4000/assets/image/Rectangle72-3.png",
+          "count": 2
+        },
+        {
+          "id": 3,
+          "title": "Вытяжное устройство GHN",
+          "descr": "12-72/168 м3/ч / гидрорегулируемый расход / от датчика присутствия",
+          "article": "Артикул: G2H1065",
+          "price": 12644,
+          "img": "http://localhost:4000/assets/image/Rectangle72-2.png",
+          "count": 3
+        }
+      ]
     }
   ]
 }
